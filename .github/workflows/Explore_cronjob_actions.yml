@@ -1,7 +1,7 @@
 name: Cron-Jobs-Test
 on:
   schedule:
-    - cron */15 * * * *
+    - cron: */15 * * * *
 
 jobs:
   build:
