@@ -1,5 +1,6 @@
 name:  crypto-data-scraper
 on:
+  push: master
   schedule:
     - cron: '0 */12 * * *'      #runs every 12 hours
 
