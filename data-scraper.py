@@ -45,6 +45,10 @@ def str_to_datetime(datestr):
 path = "./data/"
 pair = '1INCHEUR'
 
+import os
+if not os.path.exists(path):
+    os.makedirs(path)
+
 if os.path.exists(path + pair + '.json') == False:
     data = get_ohlc(pair, 1)                            # 1 minute timeframe
     # data.to_csv(r'C:\Users\User\Desktop\MLops project\Experiments\historical_data\data.csv')
