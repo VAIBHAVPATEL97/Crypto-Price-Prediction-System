@@ -42,7 +42,7 @@ def str_to_datetime(datestr):
 
     return datetime.datetime(Y, M, D, H, m, 0, tzinfo=tz.gettz("Etc/GMT"))
 
-path = ".\data\\"
+path = "./data/"
 pair = '1INCHEUR'
 
 if os.path.exists(path + pair + '.json') == False:
