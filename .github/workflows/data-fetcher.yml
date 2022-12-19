@@ -1,15 +1,17 @@
-name:  crypto-data-scraper
+name:  crypto-data-fetcher
 on:
   push: 
+    paths:
+      - ".github/workflows/*"
   schedule:
-    - cron: '0 */12 * * *'      #runs every 12 hours
+    - cron: '0 */12 * * *'      # runs every 12 hours
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: crypto-data-scraper
-        run: echo "Cron Job works!!!"
+      - name: crypto-data-fetcher
+        run: echo "Cron job is working!!!"
 
       - name: checkout repo content
         uses: actions/checkout@v3   # checkout the repository content to github runner
@@ -24,13 +26,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       
-      - name: execute data-scraper script
-        run: python data-scraper.py
+      - name: execute crypto-data-fetcher script
+        run: python data-fetcher.py
       
       - name: commit files
         run: |
-          git config --local user.email "vp161197@gmail.com"
-          git config --local user.name "Vaibhav Patel"
+          git config --local user.email ${{ secrets.EMAIL_ADDRESS }}
+          git config --local user.name ${{ secrets.FULL_NAME }}
           git add -A
           git commit -m "update data" -a
       
