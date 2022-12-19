@@ -45,7 +45,7 @@ def str_to_datetime(datestr):
 path = "./data/"
 pair = '1INCHEUR'
 
-import os
+
 if not os.path.exists(path):
     os.makedirs(path)
 
