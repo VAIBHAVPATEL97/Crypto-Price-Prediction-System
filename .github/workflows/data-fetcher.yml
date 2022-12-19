@@ -30,8 +30,8 @@ jobs:
         run: python data-fetcher.py
       
       - name: commit files
-        run: |
-          git config --local user.email ${{ secrets.EMAIL_ADDRESS }}
+        run: |                                                          # secrets added to repo
+          git config --local user.email ${{ secrets.EMAIL_ADDRESS }}    
           git config --local user.name ${{ secrets.FULL_NAME }}
           git add -A
           git commit -m "update data" -a
