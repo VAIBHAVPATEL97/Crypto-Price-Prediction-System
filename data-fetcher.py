@@ -55,10 +55,10 @@ if not os.path.exists(path):
 if os.path.exists(path + pair + '.json') == False:
     data = get_ohlc(pair, 1)                            # 1 minute timeframe
     # data.to_csv(r'C:\Users\User\Desktop\MLops project\Experiments\historical_data\data.csv')
-    data.to_json(path + pair + "test" + '.json', orient='split')
+    data.to_json(path + pair + '.json', orient='split')
 else:
     data1, ts = load_data(pair, path)
     data2 = get_ohlc(pair, 1, ts)
     data3 = pd.concat([data1, data2])
     data3.drop(data3.tail(1).index,inplace=True) # delete last record because it's not ended
-    data3.to_json(path + pair + 'test' + '.json', orient='split')
+    data3.to_json(path + pair + '.json', orient='split')
