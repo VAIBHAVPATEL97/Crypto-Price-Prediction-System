@@ -27,7 +27,7 @@ jobs:
           pip install -r requirements.txt
       
       - name: execute crypto-data-fetcher script
-        run: python data-fetcher.py
+        run: python data-fetcher.py                                     # Updated file file to get more features
       
       - name: commit files
         run: |                                                          # secrets added to repo

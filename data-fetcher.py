@@ -15,14 +15,17 @@ def get_ohlc (pair, interval=1, since='last'):
     response = requests.get(endpoint, payLoad)
     data = response.json()
     OHLC = data['result'][pair]
-    data = pd.DataFrame.from_records(OHLC, columns=['Time', 'Open', 'High', 'Low', 'Close', 'vwap', 'volume', 'count'])
+    data = pd.DataFrame.from_records(OHLC, columns=['Time', 'Open', 'High', 'Low', 'Close', 'vwap', 'volume', 'transcount'])
     data['Time'] = pd.to_datetime(data['Time'], unit='s')
     data.set_index('Time',inplace=True)
-    data = data.drop(['vwap', 'volume', 'count'], axis=1)
+    # data = data.drop(['vwap', 'volume', 'count'], axis=1)
     data['Open']  = data.Open.astype(float)
     data['High']  = data.High.astype(float)
     data['Low']   = data.Low.astype(float)
     data['Close'] = data.Close.astype(float)
+    data['vwap'] = data.vwap.astype(float)
+    data['volume'] = data.volume.astype(float)
+    data['transcount'] = data.transcount.astype(int)
     return data
 
 def load_data(pair, path):
@@ -52,10 +55,10 @@ if not os.path.exists(path):
 if os.path.exists(path + pair + '.json') == False:
     data = get_ohlc(pair, 1)                            # 1 minute timeframe
     # data.to_csv(r'C:\Users\User\Desktop\MLops project\Experiments\historical_data\data.csv')
-    data.to_json(path + pair + '.json', orient='split')
+    data.to_json(path + pair + "test" + '.json', orient='split')
 else:
     data1, ts = load_data(pair, path)
     data2 = get_ohlc(pair, 1, ts)
     data3 = pd.concat([data1, data2])
     data3.drop(data3.tail(1).index,inplace=True) # delete last record because it's not ended
-    data3.to_json(path + pair + '.json', orient='split')
+    data3.to_json(path + pair + 'test' + '.json', orient='split')
